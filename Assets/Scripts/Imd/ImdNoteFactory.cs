@@ -3,12 +3,12 @@ using UnityEngine;
 /*
 public partial class TouchNote:ImdNoteBase { }
 public partial class SlideNote:ImdNoteBase { }
-public partial class PressNote:ImdNoteBase { }
-public partial class PolyFirstPressNote:ImdNoteBase { }
+public partial class HoldNote:ImdNoteBase { }
+public partial class PolyFirstHoldNote:ImdNoteBase { }
 public partial class PolyFirstSlideNote:ImdNoteBase { }
-public partial class PolyPressNote:ImdNoteBase { }
+public partial class PolyHoldNote:ImdNoteBase { }
 public partial class PolySlideNote:ImdNoteBase { }
-public partial class PolyLastPressNote:ImdNoteBase { }
+public partial class PolyLastHoldNote:ImdNoteBase { }
 public partial class PolyLastSlideNote:ImdNoteBase { }
 public partial class SetBpmNote:ImdNoteBase { }
 public partial class SetTotalTimeNote:ImdNoteBase { }

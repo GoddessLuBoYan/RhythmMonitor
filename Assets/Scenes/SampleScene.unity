@@ -243,7 +243,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: 2
@@ -782,7 +782,8 @@ MonoBehaviour:
   BackGround: {fileID: 641523412}
   Config:
     CameraAngle: 45
-    CameraHeight: 5
+    CameraHeight: 8
+    CameraHalfFieldOfView: 30
 --- !u!1 &1799439025
 GameObject:
   m_ObjectHideFlags: 0

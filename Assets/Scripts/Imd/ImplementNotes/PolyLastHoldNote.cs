@@ -1,8 +1,8 @@
-﻿public class PolyLastPressNote:ImdNoteBase
+﻿public class PolyLastHoldNote:ImdNoteBase
 {
     protected override void Draw()
     {
         base.Draw();
-        AddPressSprite();
+        AddHoldSprite();
     }
 }

@@ -8,4 +8,5 @@ public class GameConfig
 {
     public float CameraAngle = 45f;
     public float CameraHeight = 5f;
+    public float CameraHalfFieldOfView = 30f;
 }

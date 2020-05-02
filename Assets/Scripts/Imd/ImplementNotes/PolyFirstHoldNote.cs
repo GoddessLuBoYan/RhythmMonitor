@@ -1,9 +1,9 @@
-﻿public class PolyFirstPressNote:ImdNoteBase 
+﻿public class PolyFirstHoldNote:ImdNoteBase 
 {
     protected override void Draw()
     {
         base.Draw();
         AddFirstSprite();
-        AddPressSprite();
+        AddHoldSprite();
     }
 }

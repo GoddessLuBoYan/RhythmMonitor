@@ -12,17 +12,17 @@ public class NoteSpriteCreator : ScriptableObject
         if(string.IsNullOrEmpty(AssetDatabase.AssetPathToGUID("Assets/Resources/Note")))
             AssetDatabase.CreateFolder("Assets/Resources", "Note");
         CreateTouchSprite();
-        CreatePressNote();
+        CreateHoldNote();
         CreateSlideNote();
         CreateLastSlideNote();
-        CreateFirstPressSprite();
+        CreateFirstHoldSprite();
         CreateJudgeLine();
         CreateTrackLine();
         AssetDatabase.Refresh();
     }
 
     static int width = 100;
-    static int height = 40;
+    static int height = 60;
     static string notePath = "Assets/Resources/Note/";
     static Color green = new Color32(0x00, 0xff, 0x00, 0xff);
     static Color blue = new Color32(0x00, 0xcc, 0xff, 0xff);
@@ -52,26 +52,26 @@ public class NoteSpriteCreator : ScriptableObject
         foreach (var w in Enumerable.Range(0, width)) foreach (var h in Enumerable.Range(0, height)) texture.SetPixel(w, h, blue);
         File.WriteAllBytes(notePath + "Touch.png", texture.EncodeToPNG());
     }
-    public static void CreateFirstPressSprite()
+    public static void CreateFirstHoldSprite()
     {
         var texture = new Texture2D(width, height);
         foreach (var w in Enumerable.Range(0, width)) foreach (var h in Enumerable.Range(0, height)) texture.SetPixel(w, h, green);
-        File.WriteAllBytes(notePath + "FirstPress.png", texture.EncodeToPNG());
+        File.WriteAllBytes(notePath + "FirstHold.png", texture.EncodeToPNG());
     }
 
-    public static void CreatePressNote()
+    public static void CreateHoldNote()
     {
         var texture = new Texture2D(width, height);
         foreach (var w in Enumerable.Range(0, width)) foreach (var h in Enumerable.Range(0, height)) texture.SetPixel(w, h, clear);
-        foreach (var w in Enumerable.Range(width*45/100, width*11/100)) foreach (var h in Enumerable.Range(0, height)) texture.SetPixel(w, h, yellow);
-        File.WriteAllBytes(notePath + "Press.png", texture.EncodeToPNG());
+        foreach (var w in Enumerable.Range(width * 45 / 100, width * 11 / 100)) foreach (var h in Enumerable.Range(0, height)) texture.SetPixel(w, h, yellow);
+        File.WriteAllBytes(notePath + "Hold.png", texture.EncodeToPNG());
     }
 
     public static void CreateSlideNote()
     {
         var texture = new Texture2D(width, height);
         foreach (var w in Enumerable.Range(0, width)) foreach (var h in Enumerable.Range(0, height)) texture.SetPixel(w, h, clear);
-        foreach (var w in Enumerable.Range(0, width)) foreach (var h in Enumerable.Range(height*45/100, height*11/100)) texture.SetPixel(w, h, yellow);
+        foreach (var w in Enumerable.Range(0, width)) foreach (var h in Enumerable.Range(height * 36 / 100, height * 29 / 100)) texture.SetPixel(w, h, yellow);
         File.WriteAllBytes(notePath + "Slide.png", texture.EncodeToPNG());
 
         var tex2 = new Texture2D(width, height);

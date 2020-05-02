@@ -46,18 +46,18 @@ public abstract class ImdNoteBase:MonoBehaviour, INoteInfo
     {
         var texture = Resources.Load<Texture2D>(NoteSpriteRoot + spriteName);
         if (!texture) return;
-        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0f, 0.5f));
-        var go = new GameObject();
+        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), texture.width);
+        var go = new GameObject(spriteName);
         go.transform.parent = this.transform;
         go.layer = LayerMask.NameToLayer("Note");
         var sr = go.AddComponent<SpriteRenderer>();
         sr.sprite = sprite;
         sr.size *= Scale;
-        sr.transform.localPosition = new Vector2((float)x * Scale, (float)length / 2f);
+        sr.transform.localPosition = new Vector2(((float)x + 0.5f) * Scale, (float)length / 2f);
         sr.transform.localScale = new Vector2(1f * Scale, 1f);
         if (length > 0)
         {
-            sr.transform.localScale *= new Vector2(1f, (float)length / sprite.rect.height * sprite.pixelsPerUnit);
+            sr.transform.localScale = new Vector2(1f, (float)length / sprite.rect.height * sprite.pixelsPerUnit);
         }
     }
 
@@ -93,11 +93,11 @@ public abstract class ImdNoteBase:MonoBehaviour, INoteInfo
 
     protected void AddFirstSprite()
     {
-        AddSprite("FirstPress");
+        AddSprite("FirstHold");
     }
 
-    protected void AddPressSprite()
+    protected void AddHoldSprite()
     {
-        AddSprite("Press", 0, Value / 100);
+        AddSprite("Hold", 0, Value / 100);
     }
 }

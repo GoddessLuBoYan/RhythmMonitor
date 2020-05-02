@@ -26,7 +26,7 @@ public class LevelContent : MonoBehaviour
         NoteFactory.Create(NoteType.Touch, 0, 2);
         NoteFactory.Create(NoteType.Touch, 0, 3);
         NoteFactory.Create(NoteType.Touch, 0, 4);
-        //StartCoroutine(Play());
+        StartCoroutine(Play());
     }
 
     public void LoadLevel(ILevelInfo info)
@@ -54,6 +54,7 @@ public class LevelContent : MonoBehaviour
     private void ResetLevelCamera()
     {
         LevelCamera.transform.localEulerAngles = new Vector3(-Config.CameraAngle, 0, 0);
+        LevelCamera.fieldOfView = Config.CameraHalfFieldOfView*2;
         var halfScreenWidthInScene = Mathf.Abs((float)Screen.width / (float)Screen.height * Mathf.Tan(Config.CameraAngle * Mathf.Deg2Rad) * Config.CameraHeight)/2;
         var pos = new Vector3(halfScreenWidthInScene, 0f, -Config.CameraHeight);
         pos.y = Config.CameraHeight * Mathf.Tan((LevelCamera.fieldOfView / 2 - Config.CameraAngle) * Mathf.Deg2Rad);
@@ -80,6 +81,7 @@ public class LevelContent : MonoBehaviour
 
     public IEnumerator Play()
     {
+        yield return new WaitForSeconds(1f);
         Audio.Play();
         while (true)
         {
