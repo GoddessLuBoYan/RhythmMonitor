@@ -7,19 +7,26 @@ using UnityEngine.UI;
 
 public class LevelContent : MonoBehaviour
 {
+    #region Components
     public Camera LevelCamera;
     public AudioSource Audio;
     public GameObject NoteContainer;
     public ImdNoteFactory NoteFactory;
     public Canvas BgCanvas;
     public Camera BgCamera;
-
     public Image BackGround;
+    #endregion
+    public GameConfig Config;
 
     private void Awake()
     {
-        LoadLevel(new ImdLoader().Load("Songs/pureparade/pureparade_6k_hd.imd"));
-        StartCoroutine(Play());
+        LoadLevel(new ImdLoader().Load("Songs/pureparade/pureparade_5k_hd.imd"));
+        NoteFactory.Create(NoteType.Touch, 0, 0);
+        NoteFactory.Create(NoteType.Touch, 0, 1);
+        NoteFactory.Create(NoteType.Touch, 0, 2);
+        NoteFactory.Create(NoteType.Touch, 0, 3);
+        NoteFactory.Create(NoteType.Touch, 0, 4);
+        //StartCoroutine(Play());
     }
 
     public void LoadLevel(ILevelInfo info)
@@ -46,8 +53,11 @@ public class LevelContent : MonoBehaviour
 
     private void ResetLevelCamera()
     {
-        LevelCamera.transform.localPosition = new Vector3(2f, -1.6f, -5f);
-        LevelCamera.transform.localEulerAngles = new Vector3(-45, 0, 0);
+        LevelCamera.transform.localEulerAngles = new Vector3(-Config.CameraAngle, 0, 0);
+        var halfScreenWidthInScene = Mathf.Abs((float)Screen.width / (float)Screen.height * Mathf.Tan(Config.CameraAngle * Mathf.Deg2Rad) * Config.CameraHeight)/2;
+        var pos = new Vector3(halfScreenWidthInScene, 0f, -Config.CameraHeight);
+        pos.y = Config.CameraHeight * Mathf.Tan((LevelCamera.fieldOfView / 2 - Config.CameraAngle) * Mathf.Deg2Rad);
+        LevelCamera.transform.localPosition = pos;
     }
 
     public void LoadAudio(string audioPath)
@@ -57,7 +67,9 @@ public class LevelContent : MonoBehaviour
 
     public void InitNoteFactory(int trackCount)
     {
-        NoteFactory.NoteScale = Math.Abs(LevelCamera.transform.localPosition.z / trackCount);
+        //var screenWidthInScene = Math.Abs((float)Screen.width / (float)Screen.height * Mathf.Tan(Config.CameraAngle * Mathf.Deg2Rad) * Config.CameraHeight);
+        //NoteFactory.NoteScale = screenWidthInScene / trackCount;
+        NoteFactory.NoteScale = Mathf.Abs(LevelCamera.transform.localPosition.x)*2/trackCount;
     }
 
     public void LoadImdFile(string filename)

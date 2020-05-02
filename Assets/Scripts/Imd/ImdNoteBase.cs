@@ -44,8 +44,9 @@ public abstract class ImdNoteBase:MonoBehaviour, INoteInfo
 
     protected void AddSprite(string spriteName, double x, double length)
     {
-        var sprite = Resources.Load<Sprite>(NoteSpriteRoot + spriteName);
-        if (!sprite) return;
+        var texture = Resources.Load<Texture2D>(NoteSpriteRoot + spriteName);
+        if (!texture) return;
+        var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0f, 0.5f));
         var go = new GameObject();
         go.transform.parent = this.transform;
         go.layer = LayerMask.NameToLayer("Note");
