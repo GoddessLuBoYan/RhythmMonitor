@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEngine;
 /*
 public partial class TouchNote:ImdNoteBase { }
@@ -16,6 +17,11 @@ public partial class SetTotalTimeNote:ImdNoteBase { }
 public class ImdNoteFactory:MonoBehaviour, INoteFactory
 {
     public float NoteScale { get; set; } = 1f;
+    public Transform NotesTransform;
+    public Transform UITransform;
+    public int TrackCount { get; set; }
+    private ImdNoteBase _lastNote;
+    private readonly NoteType[] _polyNotLastTypes = { NoteType.PolyFirstHold, NoteType.PolyFirstSlide, NoteType.PolyHold, NoteType.PolySlide };
     public INoteInfo Create(NoteType type, double value) { return Create(type, 0, -1, value); }
     public INoteInfo Create(NoteType type, int timestamp, double value) { return Create(type, timestamp, -1, value); }
     public INoteInfo Create(NoteType type, int timestamp, int trackId) { return Create(type, timestamp, trackId, 0); }
@@ -30,7 +36,16 @@ public class ImdNoteFactory:MonoBehaviour, INoteFactory
         t.Value = value;
         t.Scale = NoteScale;
         go.name = t.ToString();
-        go.transform.parent = this.transform;
+        if (_lastNote!=null)
+        {
+            _lastNote.NextNote = t;
+            _lastNote = null;
+        }
+        if (_polyNotLastTypes.Contains(type))
+        {
+            _lastNote = t;
+        }
+        go.transform.parent = this.NotesTransform;
         go.tag = "Note";
         return t;
     }

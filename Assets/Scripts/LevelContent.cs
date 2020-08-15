@@ -70,6 +70,7 @@ public class LevelContent : MonoBehaviour
     {
         //var screenWidthInScene = Math.Abs((float)Screen.width / (float)Screen.height * Mathf.Tan(Config.CameraAngle * Mathf.Deg2Rad) * Config.CameraHeight);
         //NoteFactory.NoteScale = screenWidthInScene / trackCount;
+        NoteFactory.TrackCount = trackCount;
         NoteFactory.NoteScale = Mathf.Abs(LevelCamera.transform.localPosition.x)*2/trackCount;
     }
 
@@ -86,10 +87,9 @@ public class LevelContent : MonoBehaviour
         while (true)
         {
             var pos = NoteContainer.transform.localPosition;
-            NoteContainer.transform.localPosition = new Vector3(pos.x, pos.y - 10 * Time.deltaTime, pos.z);
+            NoteFactory.NotesTransform.localPosition += new Vector3(pos.x, pos.y - 10 * Time.deltaTime, pos.z);
             yield return null;
         }
-        yield break;
     }
 
     public void ClearNotes()
