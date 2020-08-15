@@ -14,7 +14,7 @@ public partial class PolyLastSlideNote:ImdNoteBase { }
 public partial class SetBpmNote:ImdNoteBase { }
 public partial class SetTotalTimeNote:ImdNoteBase { }
 */
-public class ImdNoteFactory:MonoBehaviour, INoteFactory
+public class ImdNoteFactory:MonoBehaviour
 {
     public float NoteScale { get; set; } = 1f;
     public Transform NotesTransform;
@@ -22,10 +22,10 @@ public class ImdNoteFactory:MonoBehaviour, INoteFactory
     public int TrackCount { get; set; }
     private ImdNoteBase _lastNote;
     private readonly NoteType[] _polyNotLastTypes = { NoteType.PolyFirstHold, NoteType.PolyFirstSlide, NoteType.PolyHold, NoteType.PolySlide };
-    public INoteInfo Create(NoteType type, double value) { return Create(type, 0, -1, value); }
-    public INoteInfo Create(NoteType type, int timestamp, double value) { return Create(type, timestamp, -1, value); }
-    public INoteInfo Create(NoteType type, int timestamp, int trackId) { return Create(type, timestamp, trackId, 0); }
-    public INoteInfo Create(NoteType type, int timestamp, int trackId, double value)
+    public ImdNoteBase Create(NoteType type, double value) { return Create(type, 0, -1, value); }
+    public ImdNoteBase Create(NoteType type, int timestamp, double value) { return Create(type, timestamp, -1, value); }
+    public ImdNoteBase Create(NoteType type, int timestamp, int trackId) { return Create(type, timestamp, trackId, 0); }
+    public ImdNoteBase Create(NoteType type, int timestamp, int trackId, double value)
     {
         var go = new GameObject();
         var t = go.GetOrAddComponent(Enum.GetName(typeof(NoteType), type) + "Note") as ImdNoteBase;

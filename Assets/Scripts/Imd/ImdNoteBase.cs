@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public abstract class ImdNoteBase:MonoBehaviour, INoteInfo
+public abstract class ImdNoteBase:MonoBehaviour
 {
     public static int NoteWidth = 100;
     public static int NoteHeight = 40;
@@ -18,7 +18,7 @@ public abstract class ImdNoteBase:MonoBehaviour, INoteInfo
     public int TrackId { get; set; }
 
     public double Value { get; set; }
-    public INoteInfo NextNote { get; set; }
+    public ImdNoteBase NextNote { get; set; }
 
     public override string ToString()
     {

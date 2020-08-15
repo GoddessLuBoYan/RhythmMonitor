@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
+[Serializable]
 public class LevelLoaderException : Exception 
 {
     public LevelLoaderException() : base() { }

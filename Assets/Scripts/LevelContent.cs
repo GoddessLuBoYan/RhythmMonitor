@@ -29,7 +29,7 @@ public class LevelContent : MonoBehaviour
         StartCoroutine(Play());
     }
 
-    public void LoadLevel(ILevelInfo info)
+    public void LoadLevel(ImdLevelInfo info)
     {
         ResetLevelCamera();
         LoadAudio(info.AudioPath);

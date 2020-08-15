@@ -5,10 +5,33 @@ using System.IO;
 using System.Linq;
 using System;
 
-public class ImdFileReader : FileReaderBase
+public class ImdFileReader
 {
-    public ImdFileReader(INoteFactory factory) : base(factory) { }
-    public override void LoadBinaryReader(BinaryReader reader)
+    protected ImdNoteFactory factory;
+    public ImdFileReader(ImdNoteFactory factory) { this.factory = factory; }
+
+    public void LoadFile(string path)
+    {
+        var content = File.ReadAllBytes(path);
+        LoadBuffer(content);
+    }
+
+    public void LoadBuffer(byte[] buffer)
+    {
+        using (var stream = new MemoryStream(buffer))
+        {
+            LoadStream(stream);
+        }
+    }
+
+    public void LoadStream(Stream stream)
+    {
+        using (var reader = new BinaryReader(stream))
+        {
+            LoadBinaryReader(reader);
+        }
+    }
+    public void LoadBinaryReader(BinaryReader reader)
     {
         var totalTime = reader.ReadInt32();
         factory.Create

@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,27 +8,27 @@ using UnityEngine;
 
 namespace Assets.Editor
 {
-    class ImdNoteTestFactory : INoteFactory
+    class ImdNoteTestFactory : ImdNoteFactory
     {
-        public INoteInfo Create(NoteType type, double value)
+        public override ImdNoteBase Create(NoteType type, double value)
         {
             Debug.Log($"{type} {value}");
             return null;
         }
 
-        public INoteInfo Create(NoteType type, int timestamp, double value)
+        public override ImdNoteBase Create(NoteType type, int timestamp, double value)
         {
             Debug.Log($"{type} {timestamp} {value}");
             return null;
         }
 
-        public INoteInfo Create(NoteType type, int timestamp, int trackId)
+        public override ImdNoteBase Create(NoteType type, int timestamp, int trackId)
         {
             Debug.Log($"{type} {timestamp} {trackId}");
             return null;
         }
 
-        public INoteInfo Create(NoteType type, int timestamp, int trackId, double value)
+        public override ImdNoteBase Create(NoteType type, int timestamp, int trackId, double value)
         {
             Debug.Log($"{type} {timestamp} {trackId} {value}");
             return null;
@@ -51,3 +51,4 @@ namespace Assets.Editor
         }
     }
 }
+*/

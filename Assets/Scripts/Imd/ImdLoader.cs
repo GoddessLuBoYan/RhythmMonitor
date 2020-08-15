@@ -4,17 +4,11 @@ using System.Text.RegularExpressions;
 using System.Collections.Generic;
 using System.IO;
 
-public class ImdLoader : ILevelLoader
+public class ImdLoader
 {
     private static Regex imdNameReg = new Regex(@"([\S]+)_(\d+)k_(ez|nm|hd).imd");
-    private static Dictionary<string, Difficulty> difficultyDict = new Dictionary<string, Difficulty>
-    {
-        {"ez", Difficulty.Easy },
-        {"nm", Difficulty.Normal },
-        {"hd", Difficulty.Hard },
-    };
 
-    public ILevelInfo Load(string path)
+    public ImdLevelInfo Load(string path)
     {
         var match = imdNameReg.Match(path);
         if (!match.Success) throw new LevelLoaderException("imd文件名不对");
@@ -28,7 +22,7 @@ public class ImdLoader : ILevelLoader
 
         var info = new ImdLevelInfo();
         info.AudioPath = name + ".mp3";
-        info.Difficulty = difficultyDict.ContainsKey(diff) ? difficultyDict[diff] : Difficulty.Unknown;
+        info.Difficulty = diff;
         info.LevelName = name;
         info.TrackCount = trackCount;
         info.NoteCollectionPath = path;
