@@ -10,15 +10,15 @@ public abstract class ImdNoteBase:MonoBehaviour
     public static int NoteWidth = 100;
     public static int NoteHeight = 40;
     public static string NoteSpriteRoot = "Note/";
-    public float Scale = 5f/4f; 
-    public NoteType Type { get; set; }
+    public float Scale = 5f/4f;
+    public NoteType Type;
 
-    public int Timestamp { get; set; }
+    public int Timestamp;
 
-    public int TrackId { get; set; }
+    public int TrackId;
 
-    public double Value { get; set; }
-    public ImdNoteBase NextNote { get; set; }
+    public double Value;
+    public ImdNoteBase NextNote;
 
     public override string ToString()
     {
